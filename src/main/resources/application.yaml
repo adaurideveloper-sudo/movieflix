@@ -3,17 +3,28 @@ spring:
     name: movieflix
 
   datasource:
-  url: jdbc:postgresql://localhost:5432/movieflix
-  username: postgres
-  password: postgres
-  driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/movieflix
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
 
-jpa:
-  database-plataform: org.hibernate.dialect.PostgreSQLDialect
-  show-sql: true
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
-flyway:
-  enabled: true
+  flyway:
+    enabled: true
 
+  # O security fica DENTRO do bloco spring
+  security:
+    user:
+      name: admin
+      password: 123
 
-
+# O server fica FORA do bloco spring (na margem esquerda)
+server:
+  port: 8081
