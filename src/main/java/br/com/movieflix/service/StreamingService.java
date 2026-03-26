@@ -1,11 +1,9 @@
 package br.com.movieflix.service;
 
-import br.com.movieflix.entity.Category;
 import br.com.movieflix.entity.Streaming;
 import br.com.movieflix.repository.StreamingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +17,7 @@ public class StreamingService {
         return repository.findAll();
     }
 
-    public Streaming saveCategory(Streaming streaming) {
+    public Streaming save(Streaming streaming) {
         return repository.save(streaming);
     }
 
@@ -30,5 +28,6 @@ public class StreamingService {
     public void delete(Long id) {
         repository.deleteById(id);
     }
+
 
 }
