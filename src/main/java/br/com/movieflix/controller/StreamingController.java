@@ -1,11 +1,16 @@
 package br.com.movieflix.controller;
 
+import br.com.movieflix.controller.request.StreamingRequest;
 import br.com.movieflix.controller.response.StreamingResponse;
+import br.com.movieflix.entity.Streaming;
 import br.com.movieflix.mapper.StreamingMapper;
 import br.com.movieflix.service.StreamingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +30,14 @@ public class StreamingController {
                 .map(StreamingMapper::toStreamingResponse)
                 .toList();
         return  ResponseEntity.ok(streamings);
+    }
+
+    @PostMapping
+    public ResponseEntity<StreamingResponse> save(@RequestBody StreamingRequest request) {
+        Streaming newStreaming = StreamingMapper.toStreaming(request);
+        Streaming savedStreaming = streamingService.save(newStreaming);
+        return  ResponseEntity.status(HttpStatus.CREATED)
+                .body(StreamingMapper.toStreamingResponse(savedStreaming));
     }
 
 
