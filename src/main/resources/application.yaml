@@ -9,19 +9,20 @@ spring:
     driver-class-name: org.postgresql.Driver
 
   jpa:
-    database-plataform: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect # Corrigi "plataform" para "platform"
+    hibernate:
+      ddl-auto: none # <-- ADICIONE ESTA LINHA AQUI
     show-sql: true
     open-in-view: false
 
   flyway:
     enabled: true
+    baseline-on-migrate: true
 
-  # O security fica DENTRO do bloco spring
   security:
     user:
       name: admin
       password: 123
 
-# O server fica FORA do bloco spring (na margem esquerda)
 server:
   port: 8081
