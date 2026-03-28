@@ -1,4 +1,4 @@
-CREATE TABLE streaming
+CREATE TABLE IF NOT EXISTS streaming
 (
     id   BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL
