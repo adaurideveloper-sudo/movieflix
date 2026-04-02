@@ -8,21 +8,22 @@ import br.com.movieflix.entity.Category;
 import br.com.movieflix.entity.Movie;
 import br.com.movieflix.entity.Streaming;
 import lombok.experimental.UtilityClass;
-
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @UtilityClass
 public class MovieMapper {
 
     public static Movie toMovie(MovieRequest request) {
-
-        List<Category> categories = request.categories().stream()
+        // Convertendo para Set para alinhar com a Entity
+        Set<Category> categories = request.categories().stream()
                 .map(categoryId -> Category.builder().id(categoryId).build())
-                .toList();
+                .collect(Collectors.toSet());
 
-        List<Streaming> streamings = request.streamings().stream()
+        Set<Streaming> streamings = request.streamings().stream()
                 .map(streamingId -> Streaming.builder().id(streamingId).build())
-                .toList();
+                .collect(Collectors.toSet());
 
         return Movie.builder()
                 .title(request.title())
@@ -32,11 +33,10 @@ public class MovieMapper {
                 .categories(categories)
                 .streamings(streamings)
                 .build();
-
     }
 
     public static MovieResponse toMovieResponse(Movie movie) {
-
+        // Aqui mantemos List no Response, pois o JSON aceita melhor ordenação em arrays
         List<CategoryResponse> categories = movie.getCategories()
                 .stream()
                 .map(CategoryMapper::toCategoryResponse)
@@ -57,5 +57,4 @@ public class MovieMapper {
                 .streamings(streamings)
                 .build();
     }
-
 }

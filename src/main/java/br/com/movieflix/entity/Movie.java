@@ -16,11 +16,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Locale;
+import java.util.Set;
 
 @Builder
 @NoArgsConstructor
@@ -43,7 +41,7 @@ public class Movie {
     @Column(name = "release_date")
     private LocalDate releaseDate;
 
-    private double rating;
+    private Double rating;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -58,13 +56,13 @@ public class Movie {
              joinColumns = @JoinColumn(name = "movie_id"),
              inverseJoinColumns = @JoinColumn(name = "category_id")
     )
-    private List<Category> categories;
+    private Set<Category> categories;
 
     @ManyToMany
     @JoinTable(name = "movie_streaming",
             joinColumns = @JoinColumn(name = "movie_id"),
             inverseJoinColumns = @JoinColumn(name = "streaming_id")
     )
-    private List<Streaming> streamings;
+    private Set<Streaming> streamings;
     
 }

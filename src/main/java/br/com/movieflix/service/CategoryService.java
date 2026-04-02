@@ -4,7 +4,6 @@ import br.com.movieflix.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,13 +19,17 @@ public class CategoryService {
         return repository.save(category);
     }
 
-    public Optional<Category> findById(Long id) {
+    public java.util.Optional<Category> findById(Long id) {
         return repository.findById(id);
     }
+
 
     public void deleteByCategoryId(Long id) {
         repository.deleteById(id);
     }
 
 
+    public List<Category> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
 }

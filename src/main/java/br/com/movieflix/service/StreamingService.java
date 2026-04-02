@@ -30,4 +30,7 @@ public class StreamingService {
     }
 
 
+    public List<Streaming> findAllById(List<Long> ids) {
+        return repository.findAllById(ids);
+    }
 }
